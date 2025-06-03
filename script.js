@@ -88,19 +88,19 @@ const searchAction = async (e) => {
    let SBDInput = document.getElementById("SBD-input").value;
    SBDInput = SBDInput.trim();
    if (SBDInput) {
-      hiddenScore();
-      // wrapper.innerHTML = loader;
-      // let index = Math.floor(Math.random() * LIST_SERVER.length);
-      // const SERVER_URL = LIST_SERVER[index];
-      // fetch(`${SERVER_URL}/candidates/${SBDInput}`)
-      //    .then((r) => r.json())
-      //    .then((data) => {
-      //       showProfile(data);
-      //    })
-      //    .catch(() => {
-      //       const error = `<div>Không tìm thấy SBD <b>${SBDInput}</b></div>`;
-      //       wrapper.innerHTML = error;
-      //    });
+      // hiddenScore();
+      wrapper.innerHTML = loader;
+      let index = Math.floor(Math.random() * LIST_SERVER.length);
+      const SERVER_URL = LIST_SERVER[index];
+      fetch(`${SERVER_URL}/candidates/${SBDInput}`)
+         .then((r) => r.json())
+         .then((data) => {
+            showProfile(data);
+         })
+         .catch(() => {
+            const error = `<div>Không tìm thấy SBD <b>${SBDInput}</b></div>`;
+            wrapper.innerHTML = error;
+         });
    }
 };
 
