@@ -1,4 +1,4 @@
-const LIST_SERVER = [`https://2025-2026-score-10-be.vercel.app`];
+const LIST_SERVER = [`https://2025-2026-score-10-be.vercel.app`, `https://2025-2026-score-10-be-faic.vercel.app`];
 
 const searchBtn = document.getElementById("search-btn");
 const formUI = document.getElementById("form");
