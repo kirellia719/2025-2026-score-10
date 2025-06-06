@@ -1,0 +1,156 @@
+.card {
+    width: 100%;
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.information {
+    display: flex;
+    gap: 20px;
+}
+
+.information .avatar {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgb(7, 92, 28);
+    border-radius: 50%;
+}
+
+.avatar img {
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px hsla(147, 87%, 71%, 0.719);
+}
+
+.information .basic-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+.info {
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.info.name {
+    font-weight: 600;
+}
+
+.score-information {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subject-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subject {
+    text-align: center;
+}
+
+.score {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: hsl(216, 80%, 70%);
+}
+
+.subname {
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.sum {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.extra {
+    padding: 5px 10px;
+    background-color: rgb(202, 0, 0);
+    color: white;
+    border-radius: 100px;
+    font-size: .8rem;
+    align-self: center;
+}
+
+
+.sum-title {
+    font-size: 1rem;
+}
+
+.sum-score {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: hsl(29, 85%, 56%);
+}
+
+.fancy-ribbon {
+    position: absolute;
+    top: 25px;
+    left: -60px;
+    transform: rotate(-30deg);
+    padding: 8px 60px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 0;
+    /* Vuông vức */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pass {
+    background: linear-gradient(135deg, #ff8a00, #e52e71);
+    color: white;
+}
+
+.fall {
+    background: grey;
+    color: white;
+}
+
+.fancy-ribbon span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+@media only screen and (max-width: 600px) {
+    .information .avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .info {
+        font-size: .9rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .card * {
+        font-size: .8rem;
+    }
+}
+
+.noti {
+    text-align: center;
+}

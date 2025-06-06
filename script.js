@@ -8,72 +8,91 @@ const MRound = (n) => {
    return Math.round(n * 1000) / 1000;
 };
 
+const DiemChuan = 15.99;
+
+const ribbon = (result) => {
+   if (result) {
+      return `<div class="fancy-ribbon pass">
+               <span>🏅 Trúng tuyển</span>
+            </div>`;
+   } else
+      return `<div class="fancy-ribbon fall">
+               <span>Không trúng tuyển</span>
+            </div>`;
+};
+
+const noti = (result) => {
+   if (result) {
+      return `<i class="noti">
+               Xin chúc mừng thí sinh. <br/>
+               Vui lòng nộp hồ sơ từ ngày 6/6/2025 đến 8/6/2025.
+            </i>`;
+   } else return ` <i class="noti">~ Rất tiếc, thí sinh chưa trúng tuyển. ~ </i>`;
+};
+
 const showProfile = (info) => {
-   const { math = 0, english = 0, literature = 0, extra = 0, SBD = "", fullname = "", born = "", result } = info;
+   const { math = 0, english = 0, literature = 0, extra = 0, SBD = "", fullname = "", born = "", checked = 0 } = info;
 
    const isAbsence = !math && !english && !literature;
 
    const sum = MRound(extra + math + english + literature);
 
+   const result = sum >= DiemChuan;
    const profile = `
-    <div class="profile" id="profile">
-      <div class="line">
-        <div class="title">Số báo danh:</div>
-        <div class="value">${SBD}</div>
-      </div>
-      <div class="line">
-        <div class="title">Họ và tên:</div>
-        <div class="value" >${fullname}</div>
-      </div>
-      <div class="line">
-        <div class="title">Ngày sinh:</div>
-        <div class="value" >${born}</div>
-      </div>
-      ${
-         isAbsence
-            ? `<div style="font-size: 1.5rem; color: red">Vắng thi</div>`
-            : `
-            <div class="line">
-              <div class="title">Điểm kiểm tra:</div>
+    <div class="card">
+            <div class="information">
+               <div class="avatar">
+                  <img src="./avatar-nam.jpg" alt="">
+               </div>
+               <div class="basic-info">
+                  <div class="info name">${fullname}</div>
+
+                  <div class="info sbd">
+                     <div>SBD:</div>
+                     <div>${SBD}</div>
+                  </div>
+                  <div class="info birth">
+                     <div>Sinh ngày:</div>
+                     <div>${born}</div>
+                  </div>
+               </div>
             </div>
-            <div class="line">
-              <div class="score">
-                <div class="">Toán:</div>
-                <div class="value" >${MRound(math)}</div>
-              </div>
-              <div class="score">
-                <div class="">Văn:</div>
-                <div class="value" >${MRound(literature)}</div>
-              </div>
-              <div class="score">
-                <div class="">Anh:</div>
-                <div class="value" >${MRound(english)}</div>
-              </div>
-              <div class="score">
-                <div class="">Điểm khuyến khích:</div>
-                <div class="value" >${MRound(extra)}</div>
-              </div>
+            <div class="score-information">
+               <div class="subject-group">
+                  <div class="subject">
+                     <div class="score">${MRound(literature)}</div>
+                     <div class="subname">Tiềng Việt</div>
+                  </div>
+                  <div class="subject">
+                     <div class="score">${MRound(math)}</div>
+                     <div class="subname">Toán</div>
+                  </div>
+                  <div class="subject">
+                     <div class="score">${MRound(english)}</div>
+                     <div class="subname">Anh</div>
+                  </div>
+
+               </div>
+               <hr>
+               <div class="sum">
+                  <span class="sum-title">Tổng điểm ${extra ? `<span class="extra">+ ${extra}</span>` : ""} </span>
+                  <span class="sum-score ${checked ? "line-through" : ""}">${MRound(sum)}</span>
+               </div>
+               ${
+                  checked
+                     ? `<div class="sum">
+                  <span class="sum-title">Sau phúc khảo </span>
+                  <span class="sum-score">${MRound(checked)}</span>
+               </div>`
+                     : ""
+               }
+               <hr>
             </div>
-            <div class="line sum">
-              <div class="score">
-                <div class="">Tổng điểm:</div>
-                <div class="value" style="color: #fa995e">${sum}</div>
-              </div>
-              ${
-                 result != null
-                    ? `<div class="score" >
-                <div class="value" style="color: ${result ? "green" : "red"}">${
-                         result == true ? "Trúng tuyển" : "Không trúng tuyển"
-                      }</div>`
-                    : ""
-              }
-              </div>
-            </div>
-      `
-      }
-    </div>
+            ${result != null ? ribbon(result) : ""}
+            ${result != null ? noti(result) : ""}
+         </div>
   `;
-   wrapper.innerHTML = profile;
+   return profile;
 };
 
 const loader = `<div><div class="loader"></div></div>`;
@@ -95,10 +114,10 @@ const searchAction = async (e) => {
       fetch(`${SERVER_URL}/candidates/${SBDInput}`)
          .then((r) => r.json())
          .then((data) => {
-            showProfile(data);
+            wrapper.innerHTML = showProfile(data);
          })
          .catch(() => {
-            const error = `<div>Không tìm thấy SBD <b>${SBDInput}</b></div>`;
+            const error = `<div style="padding: 5px 10px; background-color: white; border-radius: 4px;">Không tìm thấy SBD <b>${SBDInput}</b></div>`;
             wrapper.innerHTML = error;
          });
    }
