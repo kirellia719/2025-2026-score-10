@@ -127,45 +127,6 @@ body {
   overflow: hidden;
 }
 
-.profile {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: .4s;
-  transition-delay: .5s;
-}
-
-.line {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.title {
-  font-weight: 600;
-}
-
-.score {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  margin: 0 1rem 5px 0;
-}
-
-.score .value {
-  font-weight: 700;
-}
-
-.sum {
-  font-size: 1.4rem;
-}
-
-@media only screen and (max-width: 600px) {
-  .sum {
-    font-size: 1.1rem;
-  }
-}
-
 .loader {
   width: 25px;
   padding: 8px;
